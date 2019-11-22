@@ -74,7 +74,7 @@ open class Sword: Eventable {
   var shardsReady = 0
 
   /// The bot token
-  let token: String
+  let token = ""
 
   /// Array of unavailable guilds the bot is currently connected to
   public internal(set) var unavailableGuilds = [Snowflake: UnavailableGuild]()
@@ -99,9 +99,8 @@ open class Sword: Eventable {
    - parameter token: The bot token
    - parameter options: Options to give bot (sharding, offline members, etc)
   */
-  public init(token: String, options: SwordOptions = SwordOptions()) {
+  public init(options: SwordOptions = SwordOptions()) {
     self.options = options
-    self.token = token
   }
   
   // MARK: Functions
@@ -158,7 +157,8 @@ open class Sword: Eventable {
   }
   
   /// Starts the bot
-  public func connect() {
+  public func connect(_ token: String) {
+    self.token = token
     self.shardManager.sword = self
     
     if self.options.willShard {
@@ -166,7 +166,7 @@ open class Sword: Eventable {
         guard let data = data else {
           guard error!.statusCode == 401 else {
             sleep(3)
-            self.connect()
+            self.connect(token)
             return
           }
           
