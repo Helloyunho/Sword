@@ -74,7 +74,7 @@ open class Sword: Eventable {
   var shardsReady = 0
 
   /// The bot token
-  let token = ""
+  var token = ""
 
   /// Array of unavailable guilds the bot is currently connected to
   public internal(set) var unavailableGuilds = [Snowflake: UnavailableGuild]()
