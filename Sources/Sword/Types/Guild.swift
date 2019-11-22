@@ -726,6 +726,8 @@ extension Guild {
     
     /// Is a verified discord
     case verified = "VERIFIED"
+
+    case animatedIcon = "ANIMATED_ICON"
   }
   
   /// Level of verification for admisitrative actions for guild

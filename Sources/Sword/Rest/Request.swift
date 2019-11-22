@@ -96,7 +96,6 @@ extension Sword {
       request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     }
 
-    #if os(macOS)
     if let file = file {
       let boundary = createBoundary()
       
@@ -112,12 +111,11 @@ extension Sword {
         with: payloadJson,
         fileUrl: file, boundary: boundary
       )
-      request.addValue(
+      request.setValue(
         "multipart/form-data; boundary=\(boundary)",
         forHTTPHeaderField: "Content-Type"
       )
     }
-    #endif
 
     let task = self.session.dataTask(with: request) {
       [unowned self, unowned sema] data, response, error in

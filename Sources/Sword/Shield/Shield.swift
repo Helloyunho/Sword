@@ -35,7 +35,7 @@ open class Shield: Sword {
   ) {
     self.shieldOptions = shieldOptions
     
-    super.init(token: token, options: swordOptions)
+    super.init(options: swordOptions)
     
     if self.shieldOptions.willDefaultHelp {
       self.registerHelp()

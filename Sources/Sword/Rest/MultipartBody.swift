@@ -41,7 +41,7 @@ extension Sword {
       body.append("\(payloadJson)\r\n")
     }
 
-    let url = URL(string: fileUrl)!
+    let url = Bundle.main.url(forResource: fileUrl, withExtension: "")!
     let filename = url.lastPathComponent
     let data = try Data(contentsOf: url)
     let mimetype = mimeType(for: fileUrl)
@@ -73,12 +73,12 @@ func createBoundary() -> String {
 */
 func mimeType(for path: String) -> String {
 
-  let url = NSURL(string: path)!
-  let pathExtension = url.pathExtension
+  let url = Bundle.main.url(forResource: path, withExtension: "")!
+  let pathExtension = url.lastPathComponent
 
   if let uti = UTTypeCreatePreferredIdentifierForTag(
       kUTTagClassFilenameExtension,
-      pathExtension! as NSString, nil
+      pathExtension as NSString, nil
     )?.takeRetainedValue() {
     if let mimetype = UTTypeCopyPreferredTagWithClass(
         uti,
